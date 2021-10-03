@@ -1,1 +1,8 @@
+SELECT c.Name FROM Customers c
+WHERE c.Id NOT IN(
+  SELECT o.CustomerId FROM Orders o
+)
 
+---
+# c.Id associated to the o.CustomerId 
+# Alias not necessary in this statement, because the two tables does not have the same FIELD name 
