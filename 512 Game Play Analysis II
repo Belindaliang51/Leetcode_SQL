@@ -1,0 +1,13 @@
+SELECT player_id, device_id
+FROM Activity
+WHERE (player_id, device_id, event_date)IN(
+  SELECT player_id, device_id, MIN(event_date)
+  FROM Activity
+  Group BY player_id
+)
+
+-----
+In subquery, the field name needed to match with the first line of query,
+because the MIN(event_date) with GROUP BY player_id will providing more than 1 rows
+if not apply fields name in the subquery, the outer query will NOT KNOW which to show
+and will give an error
